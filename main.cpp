@@ -1,10 +1,10 @@
+#include "sorting_alg.h"
+#include "gen_array.h"
 #include <iostream>
 #include <string>
 #include <vector>
-#include "sorting_alg.h"
-#include "gen_array.h"
 
-bool generateMenu()
+bool generateMenu(std::vector<int> &sortable)
 {
 
     std::string userInput = "";
@@ -18,7 +18,24 @@ bool generateMenu()
     std::cout << "\nYour Input: ";
     std::cin >> userInput;
 
-    return true;
+    if (!userInput.compare("1"))
+    {
+        sortable = genRandom();
+    }
+    else if (!userInput.compare("2"))
+    {
+        sortable = genFile();
+    }
+    else if (!userInput.compare("3"))
+    {
+        sortable = genUser();
+    }
+    else if (!userInput.compare("x"))
+    {
+        return true;
+    }
+
+    return false;
 }
 
 bool sortingMenu()
@@ -36,7 +53,12 @@ bool sortingMenu()
     std::cout << "\nYour Input: ";
     std::cin >> userInput;
 
-    return true;
+    if (!userInput.compare("x"))
+    {
+        return true;
+    }
+
+    return false;
 }
 
 int main()
@@ -51,15 +73,14 @@ int main()
     {
         if (sortable.size() == 0)
         {
-            generateMenu();
+            endState = generateMenu(sortable);
         }
         else
         {
-            sortingMenu();
+            endState = sortingMenu();
         }
-        break; // TO-DO: remove this breakpoint, it is to prevent inf looping.
     }
 
-    std::cout << "That's it! Bye-bye..." << std::endl;
+    std::cout << "\nThat's it! Bye-bye..." << std::endl;
     return 0;
 }
