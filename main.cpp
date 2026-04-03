@@ -38,7 +38,7 @@ bool generateMenu(std::vector<int> &sortable)
     return false;
 }
 
-bool sortingMenu()
+bool sortingMenu(std::vector<int> &sortable)
 {
     std::string userInput = "";
     std::cout << "\nHow would you like to generate an array to sort?" << std::endl;
@@ -47,15 +47,27 @@ bool sortingMenu()
     std::cout << "   3. Selection Sort..." << std::endl;
     std::cout << "   4. Merge Sort..." << std::endl;
     std::cout << "   5. Quick Sort..." << std::endl;
+    std::cout << "   Press \'b\' to enter another vector..." << std::endl;
     std::cout << "   Press \'x\' to exit the program..." << std::endl;
 
     std::cin.clear();
     std::cout << "\nYour Input: ";
     std::cin >> userInput;
-
+    if (!userInput.compare("b"))
+    {
+        sortable.clear();
+    }
     if (!userInput.compare("x"))
     {
         return true;
+    }
+    if (!userInput.compare("1"))
+    {
+        bubbleSort(sortable);
+    }
+    if (!userInput.compare("2"))
+    {
+        insertionSort(sortable);
     }
 
     return false;
@@ -77,7 +89,7 @@ int main()
         }
         else
         {
-            endState = sortingMenu();
+            endState = sortingMenu(sortable);
         }
     }
 
