@@ -69,6 +69,15 @@ bool sortingMenu(std::vector<int> &sortable)
     {
         insertionSort(sortable);
     }
+    if (!userInput.compare("3"))
+    {
+        selectionSort(sortable);
+    }
+    if (!userInput.compare("4"))
+    {
+        std::vector<int> copy = sortable;
+        mergeSort(copy, 0, sortable.size() - 1);
+    }
 
     return false;
 }
