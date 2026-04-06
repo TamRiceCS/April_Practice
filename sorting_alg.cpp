@@ -80,37 +80,31 @@ void merge(std::vector<int> &sortable, int start, int mid, int end)
 
     while (low <= mid || high <= end)
     {
-        std::cout << "\nlow: " << low << " mid: " << mid << " high: " << high << " end: " << end << std::endl;
-        printVector(sortable);
-        std::cout << "\n";
         if (low == mid + 1)
         {
             sortable[place++] = original[high++];
-            std::cout << "   low == mid: ";
-            printVector(sortable);
+            std::cout << "   Placed " << original[high - 1] << " at index " << place - 1 << std::endl;
         }
         else if (high == end + 1)
         {
             sortable[place++] = original[low++];
-            std::cout << "   high == end: ";
-            printVector(sortable);
+            std::cout << "   Placed " << original[low - 1] << " at index " << place - 1 << std::endl;
         }
         else if (original[low] < original[high])
         {
             sortable[place++] = original[low++];
-            std::cout << "   low < high: ";
-            printVector(sortable);
+            std::cout << "   Placed " << original[high - 1] << " at index " << place - 1 << std::endl;
         }
         else
         {
             sortable[place++] = original[high++];
-            std::cout << "   low >= high: ";
-            printVector(sortable);
+            std::cout << "   Placed " << original[low - 1] << " at index " << place - 1 << std::endl;
         }
     }
 
-    std::cout << "\n***Your finished merge is: ";
+    std::cout << "\n*** Your finished merge is: ";
     printVector(sortable);
+    std::cout << "\n";
 }
 void mergeSort(std::vector<int> &sortable, int start, int end)
 {
@@ -124,4 +118,34 @@ void mergeSort(std::vector<int> &sortable, int start, int end)
     mergeSort(sortable, mid + 1, end);
     merge(sortable, start, mid, end);
 }
-void quickSort();
+
+int partition(std::vector<int> &sortable, int start, int end)
+{
+    int prior = start - 1;
+    int curr = start;
+
+    for (curr = start; curr < end; curr++)
+    {
+        if (sortable[curr] < sortable[end])
+        {
+            std::swap(sortable[++prior], sortable[curr]);
+        }
+    }
+
+    std::swap(sortable[++prior], sortable[end]);
+
+    std::cout << "Partition Complete [" << start << "," << end << "] is: ";
+    printVector(sortable);
+    return prior;
+}
+void quickSort(std::vector<int> &sortable, int start, int end)
+{
+    if (start >= end)
+    {
+        return;
+    }
+
+    int mid = partition(sortable, start, end);
+    quickSort(sortable, start, mid - 1);
+    quickSort(sortable, mid + 1, end);
+}

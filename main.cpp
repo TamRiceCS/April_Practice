@@ -78,6 +78,11 @@ bool sortingMenu(std::vector<int> &sortable)
         std::vector<int> copy = sortable;
         mergeSort(copy, 0, sortable.size() - 1);
     }
+    if (!userInput.compare("5"))
+    {
+        std::vector<int> copy = sortable;
+        quickSort(copy, 0, sortable.size() - 1);
+    }
 
     return false;
 }
@@ -89,7 +94,7 @@ int main()
     std::vector<int> sortable;
     bool endState = false;
 
-    std::cout << "***Welcome to April's Coding Challenge: Sorting Algorithms***" << std::endl;
+    std::cout << "\n***Welcome to April's Coding Challenge: Sorting Algorithms***" << std::endl;
     while (!endState)
     {
         if (sortable.size() == 0)
